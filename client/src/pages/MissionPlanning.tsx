@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { MapPin, Plane, Settings, Calendar, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { apiRequest } from '@/lib/queryClient';
+import { apiRequest } from '@/lib/frontendQueryClient';
 import type { Drone, Mission, InsertMission } from '@shared/schema';
 
 // Mission planning form schema

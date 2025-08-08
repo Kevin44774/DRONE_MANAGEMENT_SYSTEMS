@@ -21,7 +21,7 @@ import {
   Camera
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { apiRequest } from '@/lib/queryClient';
+import { apiRequest } from '@/lib/frontendQueryClient';
 import type { Drone, Mission } from '@shared/schema';
 
 export default function LiveMonitoring() {

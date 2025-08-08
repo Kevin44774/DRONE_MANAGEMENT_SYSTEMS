@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { apiRequest } from '@/lib/queryClient';
+import { apiRequest } from '@/lib/frontendQueryClient';
 import type { Drone as DroneType, Mission } from '@shared/schema';
 
 export default function FleetDashboard() {
