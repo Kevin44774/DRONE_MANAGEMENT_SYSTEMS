@@ -48,9 +48,9 @@ const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ missions }) => {
   }, [missions]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 p-6">
       {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Mission Types Chart */}
         <div className="bg-gray-800 rounded-lg border border-gray-700 p-6">
           <h3 className="text-lg font-medium text-white mb-4">Mission Types Distribution</h3>
@@ -160,7 +160,7 @@ const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ missions }) => {
       </div>
 
       {/* Summary Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div className="bg-gray-800 rounded-lg border border-gray-700 p-6 text-center">
           <h4 className="text-sm font-medium text-gray-400 mb-2">Average Mission Duration</h4>
           <p className="text-2xl font-bold text-white">
