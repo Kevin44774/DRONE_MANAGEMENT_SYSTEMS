@@ -85,6 +85,32 @@ export class MemStorage implements IStorage {
         lastMaintenance: '2024-01-25',
         maxFlightTime: 35,
         sensors: ['RGB Camera', 'Thermal', '3D Mapping']
+      },
+      {
+        id: 'drone-005',
+        name: 'Scout Echo',
+        model: 'Parrot ANAFI USA',
+        serialNumber: 'PA005ANAFIUSA',
+        status: 'maintenance',
+        batteryLevel: 45,
+        location: { lat: 37.7449, lng: -122.4494 },
+        flightHours: 198.7,
+        lastMaintenance: '2024-01-05',
+        maxFlightTime: 32,
+        sensors: ['RGB Camera', 'Zoom Camera', 'Thermal']
+      },
+      {
+        id: 'drone-006',
+        name: 'Recon Foxtrot',
+        model: 'Yuneec Typhoon H520',
+        serialNumber: 'YU006TH520',
+        status: 'available',
+        batteryLevel: 78,
+        location: { lat: 37.7349, lng: -122.4594 },
+        flightHours: 167.3,
+        lastMaintenance: '2024-01-18',
+        maxFlightTime: 28,
+        sensors: ['RGB Camera', 'Multispectral', 'Infrared']
       }
     ];
 
