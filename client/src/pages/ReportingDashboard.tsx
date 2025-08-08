@@ -497,7 +497,7 @@ export default function ReportingDashboard() {
             <CardHeader className="pt-[0px] pb-[0px]">
               <CardTitle>Mission Performance Analysis</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-[2px] pb-[2px]">
               <div className="space-y-6">
                 <p className="text-muted-foreground -mt-4">Detailed analysis of mission execution and efficiency</p>
                 {/* Mission Status Overview */}
