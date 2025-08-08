@@ -1,0 +1,504 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force export button icons to be large */
+.export-button svg {
+  width: 60px !important;
+  height: 60px !important;
+  display: block;
+  vertical-align: middle;
+}
+
+/* Fix select component transparency issues and styling */
+[data-radix-select-content] {
+  background-color: white !important;
+  backdrop-filter: none !important;
+  min-width: var(--radix-select-trigger-width) !important;
+  max-width: 320px !important;
+}
+
+[data-radix-select-trigger] {
+  background-color: white !important;
+  border: 1px solid rgb(226 232 240) !important;
+  height: 40px !important;
+}
+
+[data-radix-select-item] {
+  background-color: transparent !important;
+  position: relative !important;
+  padding-left: 2rem !important;
+}
+
+[data-radix-select-item]:hover,
+[data-radix-select-item][data-highlighted] {
+  background-color: rgb(241 245 249) !important;
+}
+
+[data-radix-select-item][data-state="checked"] {
+  background-color: rgb(239 246 255) !important;
+  color: rgb(59 130 246) !important;
+}
+
+/* Completely hide all check mark indicators */
+[data-radix-select-item] [data-radix-select-item-indicator] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Hide any check mark icons specifically */
+[data-radix-select-item-indicator] svg,
+[data-radix-select-item-indicator] * {
+  display: none !important;
+}
+
+/* Remove padding from items since we don't need space for check marks */
+[data-radix-select-item] {
+  background-color: transparent !important;
+  padding-left: 0.75rem !important;
+  position: relative !important;
+}
+
+/* Override any default radix styles for selected items */
+[data-radix-select-item][data-state="checked"] [data-radix-select-item-indicator] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Ensure all select components are fully opaque and sized consistently */
+.select-trigger-solid {
+  background-color: white !important;
+  border: 1px solid rgb(226 232 240) !important;
+  height: 40px !important;
+  min-height: 40px !important;
+}
+
+.select-content-solid {
+  background-color: white !important;
+  border: 1px solid rgb(226 232 240) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  min-width: var(--radix-select-trigger-width) !important;
+  max-width: 320px !important;
+}
+
+/* Clean White/Light Color Scheme */
+:root {
+  /* Primary Colors - Royal Purple & Violet */
+  --primary-50: 250 245 255;
+  --primary-100: 243 232 255;
+  --primary-200: 233 213 255;
+  --primary-300: 196 181 253;
+  --primary-400: 167 139 250;
+  --primary-500: 139 92 246;
+  --primary-600: 124 58 237;
+  --primary-700: 109 40 217;
+  --primary-800: 91 33 182;
+  --primary-900: 76 29 149;
+  
+  /* Background - Clean White */
+  --bg-primary: 255 255 255;
+  --bg-secondary: 248 250 252;
+  --bg-tertiary: 241 245 249;
+  --bg-card: 255 255 255;
+  --bg-accent: 248 250 252;
+  
+  /* Text - Clean Contrast */
+  --text-primary: 15 23 42;
+  --text-secondary: 51 65 85;
+  --text-muted: 100 116 139;
+  --text-accent: 139 92 246;
+  
+  /* Status Colors - Vibrant & Clear */
+  --success: 16 185 129;
+  --success-light: 52 211 153;
+  --warning: 245 158 11;
+  --warning-light: 251 191 36;
+  --error: 239 68 68;
+  --error-light: 248 113 113;
+  --info: 139 92 246;
+  --info-light: 167 139 250;
+  
+  /* Beautiful Purple Gradients */
+  --gradient-primary: linear-gradient(135deg, rgb(139 92 246) 0%, rgb(168 85 247) 100%);
+  --gradient-secondary: linear-gradient(135deg, rgb(16 185 129) 0%, rgb(5 150 105) 100%);
+  --gradient-accent: linear-gradient(135deg, rgb(124 58 237) 0%, rgb(147 51 234) 100%);
+  --gradient-danger: linear-gradient(135deg, rgb(239 68 68) 0%, rgb(220 38 38) 100%);
+  --gradient-warning: linear-gradient(135deg, rgb(245 158 11) 0%, rgb(217 119 6) 100%);
+  --gradient-cosmic: linear-gradient(135deg, rgb(168 85 247) 0%, rgb(124 58 237) 50%, rgb(109 40 217) 100%);
+  
+  /* Card and Surface Colors */
+  --surface-primary: rgba(255, 255, 255, 0.95);
+  --surface-secondary: rgba(248, 250, 252, 0.8);
+  --surface-accent: rgba(241, 245, 249, 0.9);
+  
+  /* Border Colors */
+  --border-primary: rgba(139, 92, 246, 0.15);
+  --border-secondary: rgba(148, 163, 184, 0.2);
+  --border-accent: rgba(168, 85, 247, 0.2);
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+/* Custom utility classes */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-slide-in-up {
+  animation: slide-in-up 0.5s ease-out;
+}
+
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-secondary {
+  background: var(--gradient-secondary);
+}
+
+.gradient-danger {
+  background: var(--gradient-danger);
+}
+
+.gradient-warning {
+  background: var(--gradient-warning);
+}
+
+.glass-effect {
+  background: white;
+  border: 1px solid rgb(229 231 235);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+
+.glass-effect-strong {
+  background: white;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+}
+
+/* Text contrast improvements */
+.text-high-contrast {
+  color: rgb(var(--text-primary));
+  font-weight: 600;
+}
+
+.text-medium-contrast {
+  color: rgb(var(--text-secondary));
+}
+
+.text-accent {
+  color: rgb(var(--text-accent));
+}
+
+/* Better spacing system */
+.container-comfortable {
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.container-relaxed {
+  padding: 3rem;
+  gap: 3rem;
+}
+
+.grid-comfortable {
+  gap: 2rem;
+}
+
+.grid-relaxed {
+  gap: 3rem;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(30 41 59);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(59 130 246);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(37 99 235);
+}
+
+/* Custom focus styles */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(59 130 246 / 0.5);
+  border-color: rgb(59 130 246);
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, rgb(30 41 59), rgb(51 65 85), rgb(30 41 59));
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.375rem;
+}
+
+/* Beautiful Status Indicators */
+.status-available {
+  background: var(--gradient-secondary);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.status-in-mission {
+  background: var(--gradient-accent);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.status-maintenance {
+  background: var(--gradient-danger);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.status-charging {
+  background: var(--gradient-warning);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.status-offline {
+  background: linear-gradient(135deg, rgb(107 114 128) 0%, rgb(75 85 99) 100%);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Improved spacing utilities */
+.spacing-comfortable {
+  margin: 1.5rem;
+}
+
+.spacing-relaxed {
+  margin: 2rem;
+}
+
+.gap-comfortable {
+  gap: 1.5rem;
+}
+
+.gap-relaxed {
+  gap: 2rem;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Clean Card System */
+.card-enhanced {
+  background: white;
+  border: 1px solid rgb(229 231 235);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+}
+
+.card-enhanced:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.card-premium {
+  background: white;
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.card-premium:hover {
+  box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.1), 0 4px 6px -2px rgba(139, 92, 246, 0.05);
+  border-color: rgba(139, 92, 246, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Beautiful Button System */
+.btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px 0 rgba(139, 92, 246, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(139, 92, 246, 0.4);
+}
+
+.btn-secondary {
+  background: var(--gradient-secondary);
+  border: none;
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(16, 185, 129, 0.4);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--border-accent);
+  color: rgb(var(--text-primary));
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Enhanced Progress Bars */
+.progress-bar {
+  position: relative;
+  overflow: hidden;
+  background: rgba(var(--bg-accent), 0.3);
+  border-radius: 9999px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  background: var(--gradient-primary);
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.progress-fill:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.progress-success .progress-fill {
+  background: var(--gradient-secondary);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.progress-warning .progress-fill {
+  background: var(--gradient-warning);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.progress-danger .progress-fill {
+  background: var(--gradient-danger);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Mission status indicators */
+.mission-planned {
+  background: linear-gradient(135deg, rgb(156 163 175) 0%, rgb(107 114 128) 100%);
+}
+
+.mission-in-progress {
+  background: linear-gradient(135deg, rgb(59 130 246) 0%, rgb(37 99 235) 100%);
+}
+
+.mission-completed {
+  background: linear-gradient(135deg, rgb(34 197 94) 0%, rgb(16 185 129) 100%);
+}
+
+.mission-paused {
+  background: linear-gradient(135deg, rgb(251 146 60) 0%, rgb(249 115 22) 100%);
+}
+
+.mission-aborted {
+  background: linear-gradient(135deg, rgb(239 68 68) 0%, rgb(220 38 38) 100%);
+}
+
+/* Ensure proper CardHeader layout with reduced spacing */
+.card-header {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.125rem !important; /* Reduced from space-y-1.5 to minimal gap */
+}
+
+.card-header .card-title {
+  display: block !important;
+  width: 100% !important;
+}
+
+.card-header .card-description {
+  display: block !important;
+  width: 100% !important;
+  margin-top: 0.125rem !important; /* Reduced spacing */
+}
