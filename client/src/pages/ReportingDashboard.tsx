@@ -214,8 +214,12 @@ export default function ReportingDashboard() {
         </div>
         </div>
       </div>
-      <div className="pt-[120px] pb-[60px]">
-        <h3 className="text-xl font-semibold text-high-contrast mb-[60px]">Analysis Dashboard</h3>
+
+      {/* Spacer */}
+      <div className="h-24"></div>
+      
+      <div>
+        <h3 className="text-xl font-semibold text-high-contrast mb-16 mt-16">Analysis Dashboard</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <button
             onClick={() => setReportType('overview')}
