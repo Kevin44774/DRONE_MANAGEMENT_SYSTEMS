@@ -72,7 +72,7 @@ const mockDrones: Drone[] = [
     name: 'Patrol Zeta',
     model: 'DJI Mini 3 Pro',
     serialNumber: 'DJ006Min3Pro',
-    status: 'offline',
+    status: 'maintenance',
     batteryLevel: 0,
     location: { lat: 37.7349, lng: -122.4594 },
     flightHours: 34.7,
@@ -253,13 +253,28 @@ export class MockApiService {
   static async createMission(missionData: InsertMission): Promise<Mission> {
     await delay(300);
     const id = `mission-${Date.now()}`;
+    
     const mission: Mission = {
       id,
-      ...missionData,
-      createdAt: new Date(),
+      name: missionData.name,
+      type: missionData.type,
+      status: 'planned',
+      droneId: missionData.droneId || null,
+      area: missionData.area,
+      flightPath: missionData.flightPath || [],
+      pattern: missionData.pattern,
+      parameters: missionData.parameters,
       progress: 0,
-      status: 'planned'
+      estimatedDuration: missionData.estimatedDuration,
+      actualDuration: null,
+      priority: missionData.priority || 'medium',
+      createdAt: new Date(),
+      scheduledAt: missionData.scheduledAt || null,
+      startedAt: null,
+      completedAt: null,
+      stats: null
     };
+    
     this.missions.set(id, mission);
     return mission;
   }
@@ -269,10 +284,48 @@ export class MockApiService {
     const mission = this.missions.get(id);
     if (mission) {
       const updated = { ...mission, ...updates };
+      
+      // Update drone status based on mission status changes
+      if (updated.droneId && updates.status) {
+        const drone = this.drones.get(updated.droneId);
+        if (drone) {
+          let newDroneStatus = drone.status;
+          switch (updates.status) {
+            case 'in-progress':
+              newDroneStatus = 'in-mission';
+              updated.startedAt = updated.startedAt || new Date();
+              break;
+            case 'completed':
+              newDroneStatus = 'available';
+              updated.completedAt = updated.completedAt || new Date();
+              updated.progress = 100;
+              break;
+            case 'aborted':
+              newDroneStatus = 'available';
+              updated.completedAt = updated.completedAt || new Date();
+              break;
+            case 'paused':
+              newDroneStatus = 'in-mission'; // Keep as in-mission when paused
+              break;
+          }
+          this.drones.set(updated.droneId, { ...drone, status: newDroneStatus });
+        }
+      }
+      
       this.missions.set(id, updated);
       return updated;
     }
     return undefined;
+  }
+
+  // Helper method to start a mission (demonstrate mission lifecycle)
+  static async startMission(missionId: string): Promise<Mission | undefined> {
+    const mission = await this.updateMission(missionId, { 
+      status: 'in-progress', 
+      startedAt: new Date(),
+      progress: 0 
+    });
+    return mission;
   }
 
   static async getOrganizationStats(): Promise<Organization> {
