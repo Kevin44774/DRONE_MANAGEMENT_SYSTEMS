@@ -95,6 +95,7 @@ export default function LiveMonitoring() {
 
   const activeMissions = missions.filter(m => m.status === 'in-progress');
   const pausedMissions = missions.filter(m => m.status === 'paused');
+  const plannedMissions = missions.filter(m => m.status === 'planned');
   const completedMissions = missions.filter(m => m.status === 'completed');
   const completedToday = missions.filter(m => 
     m.status === 'completed' && 
@@ -102,10 +103,10 @@ export default function LiveMonitoring() {
     new Date(m.completedAt).toDateString() === new Date().toDateString()
   );
 
-  // Get mission details for selected mission
+  // Get mission details for selected mission - prioritize planned and active missions
   const currentMission = selectedMission 
     ? missions.find(m => m.id === selectedMission)
-    : activeMissions[0];
+    : [...plannedMissions, ...activeMissions][0];
 
   const assignedDrone = currentMission?.droneId 
     ? drones.find(d => d.id === currentMission.droneId)
@@ -135,6 +136,7 @@ export default function LiveMonitoring() {
       case 'paused': return 'bg-yellow-500';
       case 'completed': return 'bg-green-500';
       case 'aborted': return 'bg-red-500';
+      case 'planned': return 'bg-blue-400';
       default: return 'bg-gray-500';
     }
   };
@@ -189,10 +191,10 @@ export default function LiveMonitoring() {
           <span className="text-3xl font-bold text-high-contrast">{activeMissions.length}</span>
         </div>
 
-        <div className="card-premium rounded-xl p-6 text-center" data-testid="stat-paused-missions">
-          <Pause className="h-10 w-10 text-yellow-400 mx-auto mb-3" />
-          <h4 className="text-sm font-medium text-medium-contrast mb-2">Paused</h4>
-          <span className="text-3xl font-bold text-high-contrast">{pausedMissions.length}</span>
+        <div className="card-premium rounded-xl p-6 text-center" data-testid="stat-planned-missions">
+          <Clock className="h-10 w-10 text-blue-400 mx-auto mb-3" />
+          <h4 className="text-sm font-medium text-medium-contrast mb-2">Planned</h4>
+          <span className="text-3xl font-bold text-high-contrast">{plannedMissions.length}</span>
         </div>
 
         <div className="card-premium rounded-xl p-6 text-center" data-testid="stat-completed-today">
@@ -230,7 +232,7 @@ export default function LiveMonitoring() {
                         <SelectValue placeholder="Select mission to monitor" />
                       </SelectTrigger>
                       <SelectContent className="select-content-solid">
-                        {[...activeMissions, ...pausedMissions].map((mission) => (
+                        {[...plannedMissions, ...activeMissions, ...pausedMissions].map((mission) => (
                           <SelectItem key={mission.id} value={mission.id}>
                             {mission.name} - {mission.status}
                           </SelectItem>
@@ -372,6 +374,21 @@ export default function LiveMonitoring() {
 
                     {/* Mission Control Buttons */}
                     <div className="flex gap-3">
+                      {currentMission.status === 'planned' && (
+                        <Button
+                          onClick={() => missionControlMutation.mutate({ 
+                            missionId: currentMission.id, 
+                            action: 'resume' 
+                          })}
+                          disabled={missionControlMutation.isPending}
+                          data-testid="button-start-mission"
+                          className="bg-green-600 hover:bg-green-700"
+                        >
+                          <Play className="h-4 w-4 mr-2" />
+                          Start Mission
+                        </Button>
+                      )}
+
                       {currentMission.status === 'in-progress' && (
                         <>
                           <Button
@@ -474,44 +491,68 @@ export default function LiveMonitoring() {
                 <Activity className="h-5 w-5 text-purple-500" />
                 Mission Queue
               </CardTitle>
-              <CardDescription className="card-description">Active and pending missions</CardDescription>
+              <CardDescription className="card-description">From Mission Planning to Execution</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {[...activeMissions, ...pausedMissions, ...completedMissions.slice(0, 2)].length === 0 ? (
-                  <p className="text-sm text-muted-foreground">No missions</p>
-                ) : (
-                  [...activeMissions, ...pausedMissions, ...completedMissions.slice(0, 2)].map((mission) => (
-                    <div 
-                      key={mission.id} 
-                      className="p-3 border rounded-lg space-y-2 cursor-pointer hover:bg-muted/50"
-                      onClick={() => setSelectedMission(mission.id)}
-                      data-testid={`mission-queue-item-${mission.id}`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-medium text-sm">{mission.name}</h4>
-                        <div className="flex items-center gap-2">
-                          <div className={`w-2 h-2 rounded-full ${getStatusColor(mission.status)}`} />
-                          <Badge 
-                            className={`text-xs text-white ${
-                              mission.status === 'in-progress' ? 'bg-blue-500 hover:bg-blue-600' :
-                              mission.status === 'completed' ? 'bg-green-500 hover:bg-green-600' :
-                              mission.status === 'paused' ? 'bg-yellow-500 hover:bg-yellow-600' :
-                              'bg-gray-500 hover:bg-gray-600'
-                            }`}
-                          >
-                            {mission.status}
-                          </Badge>
+              <div className="space-y-4">
+                {/* Planned Missions */}
+                {plannedMissions.length > 0 && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-blue-600 mb-2 flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      Planned Missions ({plannedMissions.length})
+                    </h4>
+                    {plannedMissions.slice(0, 3).map((mission) => (
+                      <div 
+                        key={mission.id} 
+                        className="p-3 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 rounded-lg mb-2 cursor-pointer hover:bg-blue-100"
+                        onClick={() => setSelectedMission(mission.id)}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="font-medium text-sm">{mission.name}</p>
+                            <p className="text-xs text-muted-foreground">{mission.type.replace('-', ' ')} • {mission.priority} priority</p>
+                          </div>
+                          <Badge className="bg-blue-500 text-white text-xs">Ready to Start</Badge>
                         </div>
                       </div>
-                      <p className="text-xs text-muted-foreground">
-                        {mission.type.replace('-', ' ')} • {mission.estimatedDuration}min • {mission.priority} priority
-                      </p>
-                      {mission.progress > 0 && (
-                        <Progress value={mission.progress} className="h-1.5" />
-                      )}
-                    </div>
-                  ))
+                    ))}
+                  </div>
+                )}
+
+                {/* Active Missions */}
+                {activeMissions.length > 0 && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-green-600 mb-2 flex items-center gap-1">
+                      <Play className="h-4 w-4" />
+                      Active Missions ({activeMissions.length})
+                    </h4>
+                    {activeMissions.map((mission) => (
+                      <div 
+                        key={mission.id} 
+                        className="p-3 bg-green-50 dark:bg-green-950/20 border border-green-200 rounded-lg mb-2 cursor-pointer hover:bg-green-100"
+                        onClick={() => setSelectedMission(mission.id)}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="font-medium text-sm">{mission.name}</p>
+                            <p className="text-xs text-muted-foreground">{mission.progress}% complete</p>
+                          </div>
+                          <Badge className="bg-green-500 text-white text-xs">In Progress</Badge>
+                        </div>
+                        <Progress value={mission.progress} className="h-1.5 mt-2" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Show empty state if no missions */}
+                {plannedMissions.length === 0 && activeMissions.length === 0 && pausedMissions.length === 0 && (
+                  <div className="text-center py-6 text-muted-foreground">
+                    <Activity className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                    <p className="text-sm font-medium">No missions in queue</p>
+                    <p className="text-xs">Create missions in Mission Planning to see them here</p>
+                  </div>
                 )}
               </div>
             </CardContent>
