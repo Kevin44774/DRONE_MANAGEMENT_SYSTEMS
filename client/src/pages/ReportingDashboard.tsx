@@ -374,7 +374,7 @@ export default function ReportingDashboard() {
           </button>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8 mt-8">
 
         {reportType === 'overview' && (
           <div className="space-y-6">
