@@ -141,7 +141,11 @@ const ReportingDashboard: React.FC = () => {
 
       {activeTab === 'missions' && <MissionHistory missions={missions} />}
       
-      {activeTab === 'analytics' && <AnalyticsCharts missions={completedMissions} />}
+      {activeTab === 'analytics' && (
+        <div className="pt-8">
+          <AnalyticsCharts missions={completedMissions} />
+        </div>
+      )}
     </div>
   );
 };
