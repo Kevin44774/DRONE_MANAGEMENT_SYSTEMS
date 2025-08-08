@@ -148,7 +148,7 @@ export default function ReportingDashboard() {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
         <div>
-          <h1 className="text-3xl font-bold text-high-contrast mb-2">Survey Reports & Analytics</h1>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">📊 Survey Reports & Analytics</h1>
           <p className="text-medium-contrast text-lg">
             Comprehensive survey summaries and organizational flight statistics
           </p>
@@ -165,7 +165,7 @@ export default function ReportingDashboard() {
               <SelectItem value="90d">Last 90 days</SelectItem>
             </SelectContent>
           </Select>
-          <Button onClick={generateReport} data-testid="button-generate-report">
+          <Button onClick={generateReport} data-testid="button-generate-report" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
             <Download className="h-4 w-4 mr-2" />
             Export Report
           </Button>
@@ -175,54 +175,56 @@ export default function ReportingDashboard() {
       <div>
         <h3 className="text-xl font-semibold text-high-contrast mb-6">Performance Overview</h3>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 grid-comfortable">
-        <div className="card-premium rounded-xl p-6 text-center" data-testid="kpi-total-missions">
-          <Activity className="h-10 w-10 text-purple-400 mx-auto mb-3" />
+        <div className="card-premium rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200" data-testid="kpi-total-missions">
+          <Activity className="h-10 w-10 text-purple-500 mx-auto mb-3 animate-pulse" />
           <h4 className="text-sm font-medium text-medium-contrast mb-2">Total Missions</h4>
-          <span className="text-3xl font-bold text-high-contrast">{analytics.totalMissions}</span>
+          <span className="text-3xl font-bold text-purple-700 animate-pulse">{analytics.totalMissions}</span>
         </div>
 
-        <div className="card-premium rounded-xl p-6 text-center" data-testid="kpi-completed-missions">
-          <Target className="h-10 w-10 text-green-400 mx-auto mb-3" />
+        <div className="card-premium rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl bg-gradient-to-br from-green-50 to-green-100 border border-green-200" data-testid="kpi-completed-missions">
+          <Target className="h-10 w-10 text-green-500 mx-auto mb-3 animate-bounce" />
           <h4 className="text-sm font-medium text-medium-contrast mb-2">Completed</h4>
-          <span className="text-3xl font-bold text-green-400">{analytics.completedMissions}</span>
+          <span className="text-3xl font-bold text-green-600 animate-pulse">{analytics.completedMissions}</span>
         </div>
 
-        <div className="card-premium rounded-xl p-6 text-center" data-testid="kpi-success-rate">
-          <TrendingUp className="h-10 w-10 text-emerald-400 mx-auto mb-3" />
+        <div className="card-premium rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200" data-testid="kpi-success-rate">
+          <TrendingUp className="h-10 w-10 text-emerald-500 mx-auto mb-3 animate-pulse" />
           <h4 className="text-sm font-medium text-medium-contrast mb-2">Success Rate</h4>
-          <span className="text-3xl font-bold text-emerald-400">{analytics.successRate.toFixed(1)}%</span>
+          <span className="text-3xl font-bold text-emerald-600 animate-pulse">{analytics.successRate.toFixed(1)}%</span>
         </div>
 
-        <div className="card-premium rounded-xl p-6 text-center" data-testid="kpi-flight-time">
-          <Clock className="h-10 w-10 text-purple-400 mx-auto mb-3" />
+        <div className="card-premium rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200" data-testid="kpi-flight-time">
+          <Clock className="h-10 w-10 text-indigo-500 mx-auto mb-3 animate-spin" style={{ animationDuration: '3s' }} />
           <h4 className="text-sm font-medium text-medium-contrast mb-2">Total Flight Time</h4>
-          <span className="text-3xl font-bold text-purple-400">{Math.round(analytics.totalFlightTime)}</span>
+          <span className="text-3xl font-bold text-indigo-600 animate-pulse">{Math.round(analytics.totalFlightTime)}</span>
           <p className="text-xs text-medium-contrast mt-1">minutes</p>
         </div>
 
-        <div className="card-premium rounded-xl p-6 text-center" data-testid="kpi-area-surveyed">
-          <MapPin className="h-10 w-10 text-orange-400 mx-auto mb-3" />
+        <div className="card-premium rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200" data-testid="kpi-area-surveyed">
+          <MapPin className="h-10 w-10 text-orange-500 mx-auto mb-3 animate-bounce" />
           <h4 className="text-sm font-medium text-medium-contrast mb-2">Area Surveyed</h4>
-          <span className="text-3xl font-bold text-orange-400">{analytics.totalAreaSurveyed.toFixed(1)}</span>
+          <span className="text-3xl font-bold text-orange-600 animate-pulse">{analytics.totalAreaSurveyed.toFixed(1)}</span>
           <p className="text-xs text-medium-contrast mt-1">km²</p>
         </div>
 
-        <div className="card-premium rounded-xl p-6 text-center" data-testid="kpi-data-points">
-          <BarChart className="h-10 w-10 text-cyan-400 mx-auto mb-3" />
+        <div className="card-premium rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl bg-gradient-to-br from-cyan-50 to-cyan-100 border border-cyan-200" data-testid="kpi-data-points">
+          <BarChart className="h-10 w-10 text-cyan-500 mx-auto mb-3 animate-pulse" />
           <h4 className="text-sm font-medium text-medium-contrast mb-2">Data Points</h4>
-          <span className="text-3xl font-bold text-cyan-400">{analytics.totalDataPoints}</span>
+          <span className="text-3xl font-bold text-cyan-600 animate-pulse">{analytics.totalDataPoints}</span>
         </div>
         </div>
       </div>
       <div>
-        <h3 className="text-xl font-semibold text-high-contrast" style={{ marginTop: '60px', marginBottom: '20px' }}>Analysis Dashboard</h3>
+        <h3 className="text-xl font-semibold text-high-contrast animate-fade-in bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent" style={{ marginTop: '60px', marginBottom: '20px' }}>✨ Analysis Dashboard</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <button
             onClick={() => setReportType('overview')}
             data-testid="tab-overview"
-            className="group relative p-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 bg-white hover:bg-purple-50"
+            className="group relative p-6 rounded-xl transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/25 border-2 bg-gradient-to-br from-white to-purple-50 hover:from-purple-100 hover:to-purple-200"
             style={{
               borderColor: reportType === 'overview' ? '#8b5cf6' : '#e5e7eb',
+              background: reportType === 'overview' ? 'linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%)' : '',
+              boxShadow: reportType === 'overview' ? '0 20px 25px -5px rgba(139, 92, 246, 0.1), 0 10px 10px -5px rgba(139, 92, 246, 0.04)' : '',
               borderWidth: reportType === 'overview' ? '2px' : '1px',
               backgroundColor: reportType === 'overview' ? '#faf5ff' : 'white',
               transform: reportType === 'overview' ? 'scale(1.05)' : 'scale(1)',
@@ -251,16 +253,19 @@ export default function ReportingDashboard() {
               </div>
             </div>
             {reportType === 'overview' && (
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 opacity-10 animate-pulse"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 opacity-20 animate-pulse"></div>
             )}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
           </button>
 
           <button
             onClick={() => setReportType('missions')}
             data-testid="tab-missions"
-            className="group relative p-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 bg-white hover:bg-blue-50"
+            className="group relative p-6 rounded-xl transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-blue-500/25 border-2 bg-gradient-to-br from-white to-blue-50 hover:from-blue-100 hover:to-blue-200"
             style={{
               borderColor: reportType === 'missions' ? '#3b82f6' : '#e5e7eb',
+              background: reportType === 'missions' ? 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)' : '',
+              boxShadow: reportType === 'missions' ? '0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04)' : '',
               borderWidth: reportType === 'missions' ? '2px' : '1px',
               backgroundColor: reportType === 'missions' ? '#eff6ff' : 'white',
               transform: reportType === 'missions' ? 'scale(1.05)' : 'scale(1)',
@@ -289,16 +294,19 @@ export default function ReportingDashboard() {
               </div>
             </div>
             {reportType === 'missions' && (
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 opacity-10 animate-pulse"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 opacity-20 animate-pulse"></div>
             )}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
           </button>
 
           <button
             onClick={() => setReportType('fleet')}
             data-testid="tab-fleet"
-            className="group relative p-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 bg-white hover:bg-green-50"
+            className="group relative p-6 rounded-xl transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-green-500/25 border-2 bg-gradient-to-br from-white to-green-50 hover:from-green-100 hover:to-green-200"
             style={{
               borderColor: reportType === 'fleet' ? '#10b981' : '#e5e7eb',
+              background: reportType === 'fleet' ? 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)' : '',
+              boxShadow: reportType === 'fleet' ? '0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.04)' : '',
               borderWidth: reportType === 'fleet' ? '2px' : '1px',
               backgroundColor: reportType === 'fleet' ? '#f0fdf4' : 'white',
               transform: reportType === 'fleet' ? 'scale(1.05)' : 'scale(1)',
@@ -327,16 +335,19 @@ export default function ReportingDashboard() {
               </div>
             </div>
             {reportType === 'fleet' && (
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 opacity-10 animate-pulse"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 opacity-20 animate-pulse"></div>
             )}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
           </button>
 
           <button
             onClick={() => setReportType('detailed')}
             data-testid="tab-detailed"
-            className="group relative p-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 bg-white hover:bg-orange-50"
+            className="group relative p-6 rounded-xl transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-orange-500/25 border-2 bg-gradient-to-br from-white to-orange-50 hover:from-orange-100 hover:to-orange-200"
             style={{
               borderColor: reportType === 'detailed' ? '#f97316' : '#e5e7eb',
+              background: reportType === 'detailed' ? 'linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%)' : '',
+              boxShadow: reportType === 'detailed' ? '0 20px 25px -5px rgba(249, 115, 22, 0.1), 0 10px 10px -5px rgba(249, 115, 22, 0.04)' : '',
               borderWidth: reportType === 'detailed' ? '2px' : '1px',
               backgroundColor: reportType === 'detailed' ? '#fff7ed' : 'white',
               transform: reportType === 'detailed' ? 'scale(1.05)' : 'scale(1)',
@@ -367,8 +378,9 @@ export default function ReportingDashboard() {
               </div>
             </div>
             {reportType === 'detailed' && (
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 opacity-10 animate-pulse"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 opacity-20 animate-pulse"></div>
             )}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
           </button>
         </div>
 
