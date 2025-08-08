@@ -171,7 +171,6 @@ export default function ReportingDashboard() {
           </Button>
         </div>
       </div>
-
       {/* Key Performance Indicators */}
       <div>
         <h3 className="text-xl font-semibold text-high-contrast mb-6">Performance Overview</h3>
@@ -215,9 +214,8 @@ export default function ReportingDashboard() {
         </div>
         </div>
       </div>
-
       <div className="mt-12">
-        <h3 className="text-xl font-semibold text-high-contrast mb-12">Analysis Dashboard</h3>
+        <h3 className="text-xl font-semibold text-high-contrast mt-[30px] mb-[30px]">Analysis Dashboard</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <button
             onClick={() => setReportType('overview')}
