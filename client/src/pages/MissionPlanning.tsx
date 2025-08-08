@@ -233,13 +233,13 @@ export default function MissionPlanning() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" style={{ marginTop: '60px' }}>
         {/* Mission Configuration Form */}
         <div className="lg:col-span-2 space-y-6">
-          <Card data-testid="mission-config-card">
-            <CardHeader className="card-header">
-              <CardTitle className="card-title flex items-center gap-2">
-                <Settings className="h-5 w-5" />
+          <Card data-testid="mission-config-card" className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-blue-950/20 border-2 border-blue-200 dark:border-blue-800 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <CardHeader className="card-header bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-b border-blue-200 dark:border-blue-800">
+              <CardTitle className="card-title flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                <Settings className="h-5 w-5 text-blue-500" />
                 Mission Configuration
               </CardTitle>
               <CardDescription className="card-description">Define survey parameters and flight specifications</CardDescription>
@@ -549,10 +549,10 @@ export default function MissionPlanning() {
 
         {/* Mission Queue & Status */}
         <div className="space-y-6">
-          <Card data-testid="mission-queue-card">
-            <CardHeader className="card-header">
-              <CardTitle className="card-title flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
+          <Card data-testid="mission-queue-card" className="bg-gradient-to-br from-white to-green-50 dark:from-gray-900 dark:to-green-950/20 border-2 border-green-200 dark:border-green-800 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <CardHeader className="card-header bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-b border-green-200 dark:border-green-800">
+              <CardTitle className="card-title flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                <Calendar className="h-5 w-5 text-green-500" />
                 Mission Queue
               </CardTitle>
               <CardDescription className="card-description">Upcoming and active missions</CardDescription>

@@ -209,13 +209,13 @@ export default function LiveMonitoring() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" style={{ marginTop: '60px' }}>
         {/* Mission Control Panel */}
         <div className="lg:col-span-2 space-y-6">
           {/* Mission Selection */}
-          <Card>
-            <CardHeader className="card-header">
-              <CardTitle className="card-title">Mission Control Center</CardTitle>
+          <Card className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-blue-950/20 border-2 border-blue-200 dark:border-blue-800 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <CardHeader className="card-header bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-b border-blue-200 dark:border-blue-800">
+              <CardTitle className="card-title bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Mission Control Center</CardTitle>
               <CardDescription className="card-description">Monitor and control active drone survey missions</CardDescription>
             </CardHeader>
             <CardContent>
@@ -468,10 +468,10 @@ export default function LiveMonitoring() {
 
         {/* Mission Queue & Alerts */}
         <div className="space-y-6">
-          <Card data-testid="mission-queue-card">
-            <CardHeader className="card-header">
-              <CardTitle className="card-title flex items-center gap-2">
-                <Activity className="h-5 w-5" />
+          <Card data-testid="mission-queue-card" className="bg-gradient-to-br from-white to-purple-50 dark:from-gray-900 dark:to-purple-950/20 border-2 border-purple-200 dark:border-purple-800 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <CardHeader className="card-header bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-b border-purple-200 dark:border-purple-800">
+              <CardTitle className="card-title flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <Activity className="h-5 w-5 text-purple-500" />
                 Mission Queue
               </CardTitle>
               <CardDescription className="card-description">Active and pending missions</CardDescription>
