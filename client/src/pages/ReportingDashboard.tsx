@@ -494,7 +494,7 @@ export default function ReportingDashboard() {
         {reportType === 'missions' && (
           <div className="space-y-6">
           <Card>
-            <CardHeader>
+            <CardHeader className="pt-[0px] pb-[0px]">
               <CardTitle>Mission Performance Analysis</CardTitle>
             </CardHeader>
             <CardContent>
