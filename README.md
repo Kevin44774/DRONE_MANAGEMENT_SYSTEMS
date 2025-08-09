@@ -4,7 +4,7 @@ A comprehensive drone fleet management and monitoring platform designed for auto
 
 ## 🚁 Live Demo
 
-**Hosted Application**: [Your Netlify URL will go here]
+**Hosted Application**: https://drone-management-systems.vercel.app
 
 ## ✨ Features
 
